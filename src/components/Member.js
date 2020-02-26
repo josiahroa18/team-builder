@@ -1,8 +1,17 @@
 import React from 'react';
 
-function Member({member}){
+function Member({members}){
+    console.log(members);
     return (
-        <h1>Team Member</h1>
+        <div>
+            {members.map(member => {
+                return <div>
+                    <h3>{member.name}</h3>
+                    <p>{member.email}</p>
+                    <p>{member.role}</p>
+                </div>
+            })}
+        </div>
     )
 }
 

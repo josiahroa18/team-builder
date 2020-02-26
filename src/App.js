@@ -4,15 +4,28 @@ import Form from './components/Form';
 import './App.css';
 
 function App() {
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState([{
+    id: 1,
+    name: 'Josiah Roa',
+    email: 'josiahroa18@gmail.com',
+    role: 'fullStack'
+  }]);
+
+  function addNewMember(member){
+    const newMember = {
+      id: Date.now(),
+      name: member.name,
+      email: member.email,
+      role: member.role
+    };
+    setMembers([...members, newMember]);
+  }
 
   return (
     <div className="App">
-      {members.map((member, index) => {
-        return <Member member={member}/>
-      })}
+      <Member members={members}/>
       <h1>Add New Member</h1>
-      <Form/>
+      <Form addNewMember={addNewMember}/>
     </div>
   );
 }
