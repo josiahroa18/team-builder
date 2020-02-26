@@ -25,7 +25,7 @@ function App() {
 
   function handleError(errors){
     setErrorArr(errors);
-    console.log(errors);
+    // console.log(errors);
   }
 
   return (

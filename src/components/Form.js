@@ -5,7 +5,7 @@ function Form(props){
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [role, setRole] = useState('');
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
 
     // Handle changes to name input
     function handleNameChange(e){
@@ -25,12 +25,12 @@ function Form(props){
     // Handle form submission
     function submitForm(e){
         let valid = true;
+        const errors = [];
         e.preventDefault();
         if(name === ''){
             valid = false;
-            if(!errors.includes('Please enter a name')){
-                setErrors([...errors, 'Please enter a name']);
-            }
+                // setErrors([...errors, 'Please enter a name']);
+            errors.push('Please enter a name');
         }
         if(name.length < 3){
             valid = false;
@@ -55,7 +55,7 @@ function Form(props){
             setName('');
             setEmail('');
             setRole('');
-            setErrors('');
+            // setErrors('');
         }else{
             props.handleError(errors);
         }
