@@ -4,7 +4,7 @@ function Form(props){
     // State for inputs
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('Front End Engineer');
 
     // Handle changes to name input
     function handleNameChange(e){
@@ -14,6 +14,11 @@ function Form(props){
     // Handle changes to email input
     function handleEmailChange(e){
         setEmail(e.target.value);
+    }
+
+    // Handle changes to role input
+    function handleRoleChange(e){
+        setRole(e.target.value);
     }
 
     // Handle form submission
@@ -27,7 +32,7 @@ function Form(props){
         props.addNewMember(newMember);
         setName('');
         setEmail('');
-        setRole('');
+        setRole('Front End Engineer');
     }
 
     return(
@@ -37,6 +42,7 @@ function Form(props){
                 type='text' 
                 onChange={handleNameChange}
                 value={name}
+                placeholder='name'
             >
             </input>
             <label htmlFor='email'>Email</label>
@@ -44,17 +50,18 @@ function Form(props){
                 type='email' 
                 onChange={handleEmailChange}
                 value={email}
+                placeholder='email'
             >
             </input>
             <label htmlFor='role'>Role</label>
-            <select id='roles' name='roles'>
-                <option value='frontEnd' selected>Front End Engineer</option>
-                <option value='backEnd'>Back End Engineer</option>
-                <option value='fullStack'>Full Stack Developer</option>
-                <option value='designer'>UX/UI Designer</option>
-                <option value='mobileDev'>Mobile Developer</option>
-                <option value='dataScience'>Data Science Engineer</option>
-                <option value='machineLearning'>Machine Learning Engineer</option>
+            <select id='roles' name='roles' onChange={handleRoleChange}>
+                <option value='Front End Engineer'>Front End Engineer</option>
+                <option value='Back End Engineer'>Back End Engineer</option>
+                <option value='Full Stack Developer'>Full Stack Developer</option>
+                <option value='UX/UI Designer'>UX/UI Designer</option>
+                <option value='Mobile Developer'>Mobile Developer</option>
+                <option value='Data Science Engineer'>Data Science Engineer</option>
+                <option value='Machine Learning Engineer'>Machine Learning Engineer</option>
             </select>
             <button type='submit' value='submit'>Add Member</button>
         </form>

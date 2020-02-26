@@ -1,11 +1,10 @@
 import React from 'react';
 
 function Member({members}){
-    console.log(members);
     return (
         <div>
             {members.map(member => {
-                return <div>
+                return <div key={member.id}>
                     <h3>{member.name}</h3>
                     <p>{member.email}</p>
                     <p>{member.role}</p>

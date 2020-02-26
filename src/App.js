@@ -8,7 +8,7 @@ function App() {
     id: 1,
     name: 'Josiah Roa',
     email: 'josiahroa18@gmail.com',
-    role: 'fullStack'
+    role: 'Full Stack Developer'
   }]);
 
   function addNewMember(member){
