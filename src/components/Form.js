@@ -4,7 +4,8 @@ function Form(props){
     // State for inputs
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [role, setRole] = useState('Front End Engineer');
+    const [role, setRole] = useState('');
+    const [errors, setErrors] = useState([]);
 
     // Handle changes to name input
     function handleNameChange(e){
@@ -23,16 +24,41 @@ function Form(props){
 
     // Handle form submission
     function submitForm(e){
+        let valid = true;
         e.preventDefault();
-        const newMember = {
-            name: name,
-            email: email,
-            role: role
+        if(name === ''){
+            valid = false;
+            if(!errors.includes('Please enter a name')){
+                setErrors([...errors, 'Please enter a name']);
+            }
         }
-        props.addNewMember(newMember);
-        setName('');
-        setEmail('');
-        setRole('Front End Engineer');
+        if(name.length < 3){
+            valid = false;
+            // setErrors(errors.push('Names must be at least 3 characters long'));
+        }
+        if(email === ''){
+            valid = false;
+            // setErrors(errors.push('Please enter an email'));
+        }
+        if(role === ''){
+            valid = false;
+            // setErrors(errors.push('Please select a role'));
+        }
+
+        if(valid){
+            const newMember = {
+                name: name,
+                email: email,
+                role: role
+            }
+            props.addNewMember(newMember);
+            setName('');
+            setEmail('');
+            setRole('');
+            setErrors('');
+        }else{
+            props.handleError(errors);
+        }
     }
 
     return(
@@ -54,7 +80,8 @@ function Form(props){
             >
             </input>
             <label htmlFor='role'>Role</label>
-            <select id='roles' name='roles' onChange={handleRoleChange}>
+            <select id='roles' onChange={handleRoleChange} value={role}>
+                <option value='' disabled>Select Role</option>
                 <option value='Front End Engineer'>Front End Engineer</option>
                 <option value='Back End Engineer'>Back End Engineer</option>
                 <option value='Full Stack Developer'>Full Stack Developer</option>

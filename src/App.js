@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Member from './components/Member';
 import Form from './components/Form';
+import Error from './components/Error';
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     email: 'josiahroa18@gmail.com',
     role: 'Full Stack Developer'
   }]);
+  const [errorArr, setErrorArr] = useState([]);
 
   function addNewMember(member){
     const newMember = {
@@ -21,11 +23,19 @@ function App() {
     setMembers([...members, newMember]);
   }
 
+  function handleError(errors){
+    setErrorArr(errors);
+    console.log(errors);
+  }
+
   return (
     <div className="App">
+      <div className='form-container'>
+        <h1>Add New Member</h1>
+        <Error errorArr={errorArr}/>
+        <Form addNewMember={addNewMember} handleError={handleError}/>
+      </div>
       <Member members={members}/>
-      <h1>Add New Member</h1>
-      <Form addNewMember={addNewMember}/>
     </div>
   );
 }
