@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 
 function Error(props){
     const [ name, setName ] = useState('error-container')
-    console.log(props.errorArr);
 
     useEffect(() => {
-        if(props.errorArr.length < 1){
-            setName('error-container');
-        }
-        else{
+        if(props.errorArr.length === 0){
             setName('error-container none');
         }
-    }, [name])
+        else{
+            setName('error-container');
+        }
+    }, [props])
 
     return(
         <div className={name}>
-            <p>Please enter a name</p>
-            <p>Please enter an email</p>
+            {props.errorArr.map(error=>{
+                return <p>{error}</p>
+            })}
         </div>
     )
 }

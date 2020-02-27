@@ -28,23 +28,23 @@ function Form(props){
         const errors = [];
         e.preventDefault();
         if(name === ''){
-            valid = false;
-                // setErrors([...errors, 'Please enter a name']);
             errors.push('Please enter a name');
+            valid = false;
         }
         if(name.length < 3){
+            if(valid){
+                errors.push('Names must be at least 3 characters long');
+            }
             valid = false;
-            // setErrors(errors.push('Names must be at least 3 characters long'));
         }
         if(email === ''){
             valid = false;
-            // setErrors(errors.push('Please enter an email'));
+            errors.push('Please enter an email')
         }
         if(role === ''){
             valid = false;
-            // setErrors(errors.push('Please select a role'));
+            errors.push('Please select a role');
         }
-
         if(valid){
             const newMember = {
                 name: name,
@@ -55,7 +55,8 @@ function Form(props){
             setName('');
             setEmail('');
             setRole('');
-            // setErrors('');
+            console.log('Success');
+            props.handleError(errors);
         }else{
             props.handleError(errors);
         }
